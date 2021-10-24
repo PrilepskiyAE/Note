@@ -5,21 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.ambrella.note.R
-
-
+import com.ambrella.note.databinding.FragmentAddNoteBinding
 
 
 class AddNoteFragment : Fragment() {
 
-
+    private var _binding: FragmentAddNoteBinding? = null
+    private val mBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_note, container, false)
+        _binding= FragmentAddNoteBinding.inflate(layoutInflater,container,false)
+        return mBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val navController= Navigation.findNavController(view)
+        /*
+        mBinding.btdown2.setOnClickListener {
+            findNavController().navigate(R.id.mainFragment)
+            val bundle=Bundle()
+            bundle.putString("title","title")
+            navController.navigate(R.id.mainFragment, bundle)
+        }
+
+         */
+    }
 }
