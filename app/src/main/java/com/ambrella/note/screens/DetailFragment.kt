@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ambrella.note.R
 import com.ambrella.note.databinding.FragmentDetailBinding
+import com.ambrella.note.viewmodel.NoteListViewModel
 
 
 class DetailFragment : Fragment() {
@@ -27,7 +29,12 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController= Navigation.findNavController(view)
-        /*
+        val title = requireArguments().getString("title")
+        val text = requireArguments().getString("text")
+        mBinding.tvTitle.text=title
+        mBinding.tvText.text=text
+
+
         mBinding.btdown.setOnClickListener {
             findNavController().navigate(R.id.mainFragment)
             val bundle=Bundle()
@@ -35,6 +42,6 @@ class DetailFragment : Fragment() {
             navController.navigate(R.id.mainFragment, bundle)
         }
 
-         */
+
     }
 }

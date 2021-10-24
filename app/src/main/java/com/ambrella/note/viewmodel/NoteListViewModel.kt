@@ -10,19 +10,19 @@ class NoteListViewModel(private val repository:NoteRepositoryImpl) : ViewModel()
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
 
-    fun insertCity(note: Note) {
+    fun insertNote(note: Note) {
         showProgress()
         viewModelScope.launch { repository.insert(note) }
         hideProgress()
     }
 
-    fun updateCity(note: Note) {
+    fun updateNote(note: Note) {
         showProgress()
         viewModelScope.launch { repository.update(note) }
         hideProgress()
     }
 
-    fun deleteCity(note: Note) {
+    fun deleteNote(note: Note) {
         showProgress()
         viewModelScope.launch {
             repository.delete(note)
@@ -30,7 +30,7 @@ class NoteListViewModel(private val repository:NoteRepositoryImpl) : ViewModel()
         hideProgress()
     }
 
-    fun deleteCityAll(note: Note) {
+    fun deleteNoteAll(note: Note) {
         showProgress()
         viewModelScope.launch {
             repository.delete(note)
@@ -38,7 +38,7 @@ class NoteListViewModel(private val repository:NoteRepositoryImpl) : ViewModel()
         hideProgress()
     }
 
-    fun getAllCity(): LiveData<List<Note>> {
+    fun getAllNote(): LiveData<List<Note>> {
         val notes: LiveData<List<Note>>?
         showProgress()
         notes = repository.getAllNote().asLiveData()

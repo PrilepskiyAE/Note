@@ -38,7 +38,7 @@ class NoteAdapter: RecyclerView.Adapter<noteViewHolder>() {
         return notes.isEmpty()
     }
 
-    fun getCity(pos: Int): Note {
+    fun getNote(pos: Int): Note {
         return notes[pos]
     }
 
@@ -58,7 +58,7 @@ class noteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun init(currentNote: Note) {
-        mTitle?.text = currentNote.title
-        mText?.text=currentNote.text
+        mTitle?.text = currentNote.title.toString()
+        mText?.text=currentNote.text.toString()
     }
 }
