@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController=Navigation.findNavController(view)
-        /*
+
         mBinding.button.setOnClickListener {
             findNavController().navigate(R.id.mainFragment)
             val bundle=Bundle()
@@ -35,6 +35,6 @@ class LoginFragment : Fragment() {
             navController.navigate(R.id.mainFragment, bundle)
         }
 
-         */
+
     }
 }
