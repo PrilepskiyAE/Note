@@ -44,6 +44,9 @@ class MainFragment : Fragment() {
         val swapHelperRight = getSwapRight()
         swapHelperRight.attachToRecyclerView(mBinding.recyclerView)
 
+        val swapHelperLeft =getSwapLeft(navController)
+        swapHelperLeft.attachToRecyclerView(mBinding.recyclerView)
+
         noteadapter.onNoteClicLisener=object : NoteAdapter.OnNoteClicLisener{
             override fun onNoteClick(note: Note) {
                 findNavController().navigate(R.id.detailFragment)
@@ -109,7 +112,32 @@ class MainFragment : Fragment() {
         )
     }
 
+    private fun getSwapLeft(navController:NavController): ItemTouchHelper {
+        return ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
 
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    findNavController().navigate(R.id.addNoteFragment)
+                    val bundle=Bundle()
+
+                    bundle.putString("title",noteadapter.getNote(viewHolder.adapterPosition).title)
+                    bundle.putString("text",noteadapter.getNote(viewHolder.adapterPosition).text)
+                    bundle.putInt("id",noteadapter.getNote(viewHolder.adapterPosition).id)
+
+                    bundle.putInt("update",1)
+                    navController.navigate(R.id.addNoteFragment, bundle)
+                    //cityListViewModel.updateNote(Note(viewHolder.adapterPosition))
+                }
+            }
+        )
+    }
 
     private fun updateResults(notes: List<Note>) {
         noteadapter.setNote(notes)

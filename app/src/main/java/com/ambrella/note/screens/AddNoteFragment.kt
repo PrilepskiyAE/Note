@@ -38,24 +38,39 @@ class AddNoteFragment : Fragment() {
         viewModelFactory = NoteListViewModelFactory(
             NoteRepositoryImpl(requireContext(), Dispatchers.IO)
         )
-
+        val isUpd = requireArguments().getInt("update")
+        if(isUpd==1)
+        {
+            mBinding.editTextTextPersonName2.setText(requireArguments().getString("title"))
+            mBinding.editTextTextPersonName2.setText(requireArguments().getString("text"))
+        }
 
         cityListViewModel =
             ViewModelProvider(this, viewModelFactory).get(NoteListViewModel::class.java)
         mBinding.btadd.setOnClickListener {
-
+            if (isUpd==0){
             findNavController().navigate(R.id.mainFragment)
-           // val bundle=Bundle()
-          //  bundle.putString("title","title")
-            navController.navigate(R.id.mainFragment)
+            val bundle=Bundle()
+            bundle.putString("title","title")
+            navController.navigate(R.id.mainFragment, bundle)
             cityListViewModel.insertNote(
                 Note(title = mBinding.editTextTextPersonName2.text.toString(),
                 text = mBinding.editTextTextPersonName3.text.toString())
             )
         }
-
+            else if(isUpd==1)
+            {
+                findNavController().navigate(R.id.mainFragment)
+                val bundle=Bundle()
+                bundle.putString("title","title")
+                navController.navigate(R.id.mainFragment, bundle)
+                cityListViewModel.updateNote(
+                    Note(id = requireArguments().getInt("id"),title = mBinding.editTextTextPersonName2.text.toString(),
+                        text = mBinding.editTextTextPersonName3.text.toString())
+                )
             }
         }
 
 
-
+    }
+}

@@ -30,9 +30,9 @@ class LoginFragment : Fragment() {
 
         mBinding.button.setOnClickListener {
             findNavController().navigate(R.id.mainFragment)
-            val bundle=Bundle()
-            bundle.putString("title","title")
-            navController.navigate(R.id.mainFragment, bundle)
+           // val bundle=Bundle()
+            //bundle.putString("title","title")
+            navController.navigate(R.id.mainFragment)
         }
 
 
