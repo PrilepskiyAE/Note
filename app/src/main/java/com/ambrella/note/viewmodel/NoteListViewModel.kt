@@ -5,7 +5,7 @@ import com.ambrella.note.model.Note
 import com.ambrella.note.repository.NoteRepositoryImpl
 import kotlinx.coroutines.launch
 
-class NoteListViewModel(private val repository:NoteRepositoryImpl) : ViewModel() {
+class NoteListViewModel(private val repository: NoteRepositoryImpl) : ViewModel() {
     val data: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading

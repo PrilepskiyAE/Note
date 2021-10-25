@@ -8,10 +8,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class NoteRepositoryImpl(context: Context, private val backgroundDispatcher: CoroutineDispatcher):RepositoryNote {
-   private val noteDao: DaoNote
+class NoteRepositoryImpl(context: Context, private val backgroundDispatcher: CoroutineDispatcher) :
+    RepositoryNote {
+    private val noteDao: DaoNote
 
-   init {
+    init {
         val database = RoomDatabaseNote.getInstance(context, backgroundDispatcher)
         noteDao = database!!.daoNote()
     }
@@ -40,7 +41,7 @@ class NoteRepositoryImpl(context: Context, private val backgroundDispatcher: Cor
     }
 
     override suspend fun update(note: Note) {
-        withContext(backgroundDispatcher){
+        withContext(backgroundDispatcher) {
             noteDao.update(note)
         }
     }

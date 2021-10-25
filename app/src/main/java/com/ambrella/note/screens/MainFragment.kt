@@ -1,10 +1,10 @@
 package com.ambrella.note.screens
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -40,25 +40,25 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController= Navigation.findNavController(view)
+        val navController = Navigation.findNavController(view)
         val swapHelperRight = getSwapRight()
         swapHelperRight.attachToRecyclerView(mBinding.recyclerView)
 
-        val swapHelperLeft =getSwapLeft(navController)
+        val swapHelperLeft = getSwapLeft(navController)
         swapHelperLeft.attachToRecyclerView(mBinding.recyclerView)
 
-        noteadapter.onNoteClicLisener=object : NoteAdapter.OnNoteClicLisener{
+        noteadapter.onNoteClicLisener = object : NoteAdapter.OnNoteClicLisener {
             override fun onNoteClick(note: Note) {
                 findNavController().navigate(R.id.detailFragment)
-                val bundle=Bundle()
-                bundle.putString("title",note.title)
-                bundle.putString("text",note.text)
+                val bundle = Bundle()
+                bundle.putString("title", note.title)
+                bundle.putString("text", note.text)
                 navController.navigate(R.id.detailFragment, bundle)
             }
 
         }
 
-        mBinding.recyclerView.adapter=noteadapter
+        mBinding.recyclerView.adapter = noteadapter
         viewModelFactory = NoteListViewModelFactory(
             NoteRepositoryImpl(requireContext(), Dispatchers.IO)
         )
@@ -71,10 +71,10 @@ class MainFragment : Fragment() {
 
         mBinding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.addNoteFragment)
-            val bundle=Bundle()
+            val bundle = Bundle()
             //bundle.putString("title","title")
             //bundle.putString("text","title")
-            bundle.putInt("update",0)
+            bundle.putInt("update", 0)
             navController.navigate(R.id.addNoteFragment, bundle)
         }
 
@@ -112,7 +112,7 @@ class MainFragment : Fragment() {
         )
     }
 
-    private fun getSwapLeft(navController:NavController): ItemTouchHelper {
+    private fun getSwapLeft(navController: NavController): ItemTouchHelper {
         return ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onMove(
@@ -125,13 +125,13 @@ class MainFragment : Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     findNavController().navigate(R.id.addNoteFragment)
-                    val bundle=Bundle()
+                    val bundle = Bundle()
 
-                    bundle.putString("title",noteadapter.getNote(viewHolder.adapterPosition).title)
-                    bundle.putString("text",noteadapter.getNote(viewHolder.adapterPosition).text)
-                    bundle.putInt("id",noteadapter.getNote(viewHolder.adapterPosition).id)
+                    bundle.putString("title", noteadapter.getNote(viewHolder.adapterPosition).title)
+                    bundle.putString("text", noteadapter.getNote(viewHolder.adapterPosition).text)
+                    bundle.putInt("id", noteadapter.getNote(viewHolder.adapterPosition).id)
 
-                    bundle.putInt("update",1)
+                    bundle.putInt("update", 1)
                     navController.navigate(R.id.addNoteFragment, bundle)
                     //cityListViewModel.updateNote(Note(viewHolder.adapterPosition))
                 }
@@ -142,7 +142,7 @@ class MainFragment : Fragment() {
     private fun updateResults(notes: List<Note>) {
         noteadapter.setNote(notes)
         mBinding.recyclerView.apply {
-        adapter=noteadapter
+            adapter = noteadapter
         }
 
     }

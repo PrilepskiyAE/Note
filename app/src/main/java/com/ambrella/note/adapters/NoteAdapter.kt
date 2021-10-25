@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ambrella.note.R
 import com.ambrella.note.model.Note
 
-class NoteAdapter: RecyclerView.Adapter<noteViewHolder>() {
+class NoteAdapter : RecyclerView.Adapter<noteViewHolder>() {
 
-    private var notes:List<Note> = listOf()
+    private var notes: List<Note> = listOf()
     var onNoteClicLisener: OnNoteClicLisener? = null
 
     interface OnNoteClicLisener {
         fun onNoteClick(note: Note)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): noteViewHolder {
-       val view = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
         return noteViewHolder(view)
     }
 
@@ -43,22 +44,22 @@ class NoteAdapter: RecyclerView.Adapter<noteViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-       return notes.size
+        return notes.size
     }
 }
 
 class noteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private var mTitle: TextView? = null
-    private var mText: TextView? =null
+    private var mText: TextView? = null
 
     init {
 
         mTitle = itemView.findViewById(R.id.item_note_name)
-        mText=itemView.findViewById(R.id.item_note_text)
+        mText = itemView.findViewById(R.id.item_note_text)
     }
 
     fun init(currentNote: Note) {
         mTitle?.text = currentNote.title.toString()
-        mText?.text=currentNote.text.toString()
+        mText?.text = currentNote.text.toString()
     }
 }

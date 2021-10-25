@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 
-@Database(entities = arrayOf(Note::class),version = 1,exportSchema = false)
+@Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
 abstract class RoomDatabaseNote : RoomDatabase() {
-    abstract fun daoNote():DaoNote
+    abstract fun daoNote(): DaoNote
 
-    companion object{
+    companion object {
         private var INSTANCE: RoomDatabaseNote? = null
         fun getInstance(
             context: Context,
